@@ -7,8 +7,8 @@ public class Character {
         this.hp = hp;
         this.power = power;
     }
-    void attack(){
-
+    void attack(Character character){
+        character.hp -= this.power;
     }
     boolean isDead(){
         if(this.hp <= 0) {
