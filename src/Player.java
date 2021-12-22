@@ -10,8 +10,8 @@ public class Player extends Character{
     HashMap<String, Integer> useMagic;
 
     //levelとmpは引数とらずに初期値を入れていいかも
-    public Player(String name,int hp,int power,int level,int mp){
-        super(name,hp,power);
+    public Player(String name,int hp,int power,int experience,int level,int mp){
+        super(name,hp,power,experience);
         this.level = level;
         this.mp = mp;
         this.useMagic = new HashMap<String, Integer>();
@@ -35,7 +35,6 @@ public class Player extends Character{
         Random random = new Random();
         int RUN_PROBABILITY = 7;
         int randomValue = random.nextInt(10);
-        System.out.println(randomValue);
         if(randomValue >= RUN_PROBABILITY){
             return false;
         }
