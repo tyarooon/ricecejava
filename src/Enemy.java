@@ -1,8 +1,7 @@
 public class Enemy extends Character{
-    int experience;
 
     public Enemy(String name,int hp,int power,int experience){
-        super(name,hp,power);
+        super(name,hp,power,experience);
         this.experience = experience;
     }
 

@@ -1,7 +1,15 @@
+import java.util.Scanner;
+
 public class GameMaster {
     //ゲームスタート時
-    void start(){
+    void start(Player player){
+        System.out.println("名前を入力してください");
+        Scanner sc = new Scanner(System.in);
+        String name = sc.next();
+        player.setName(name);
+        System.out.println(name+"は魔王を倒す旅に出た！");
     }
+    
     void encounterEnemy(String enemyName){
         System.out.println(enemyName+"があらわれた！");
     }
@@ -11,11 +19,36 @@ public class GameMaster {
     boolean currentInput(){
         return false;
     }
-    void playerTurn(){
+    void playerTurn(Player player,Enemy enemy){
+        System.out.println(player.name+"のターン");
+        System.out.println("コマンドを入力してください。");
+        System.out.println("1:たたかう 2:魔法 3:逃げる");
+        Scanner sc = new Scanner(System.in);
+        int commandNumber = sc.nextInt();
+        if(commandNumber == 1){
+            System.out.println(player.name+"はたたかうことにした。");
+            System.out.println(enemy.name+"に"+player.power+"ダメージ。");
+            player.attack(enemy);
+        }
+        if(commandNumber == 3){
+            if(player.run_away()){
+                System.out.println(player.name+"は逃げた！");
+            }
+            else{
+                System.out.println(player.name+"は逃げきれなかった。");
+            }
+        }
     }
-    void enemyTurn(){
+    void enemyTurn(Player player,Enemy enemy){
+        System.out.println(enemy.name+"のターン");
+        enemy.attack(player);
+        System.out.println(player.name+"に"+enemy.power+"ダメージ。");
     }
-    void levelUp(Player player,int experience){
-
+    void levelUp(Player player,Enemy enemy){
+        player.experience += enemy.experience;
+        int ToUplevel = 5 * player.level;
+        if(player.experience >= ToUplevel){
+            player.level += 1;
+        }
     }
 }
