@@ -22,7 +22,7 @@ public class GameMaster {
     void playerTurn(Player player,Enemy enemy){
         System.out.println(player.name+"のターン");
         System.out.println("コマンドを入力してください。");
-        System.out.println("1:たたかう 2:魔法 3:逃げる");
+        System.out.println("1:たたかう 2:魔法("+player.mp+")3:逃げる");
         Scanner sc = new Scanner(System.in);
         int commandNumber = sc.nextInt();
         if(commandNumber == 1){
@@ -31,19 +31,23 @@ public class GameMaster {
             player.attack(enemy);
         }
         if(commandNumber == 3){
+            System.out.println(player.name+"は逃げた！！");
             if(player.run_away()){
-                System.out.println(player.name+"は逃げた！");
+                System.out.println("うまく逃げ切れたようだ。");
+                enemy.hp = 0;
             }
             else{
-                System.out.println(player.name+"は逃げきれなかった。");
+                System.out.println("逃げきれなかった。");
             }
         }
     }
+
     void enemyTurn(Player player,Enemy enemy){
         System.out.println(enemy.name+"のターン");
         enemy.attack(player);
         System.out.println(player.name+"に"+enemy.power+"ダメージ。");
     }
+
     void levelUp(Player player,Enemy enemy){
         player.experience += enemy.experience;
         int ToUplevel = 5 * player.level;
